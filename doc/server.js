@@ -2,7 +2,9 @@ var fs = require('fs')
 var express = require('express')
 var app = express();
 
-var docRoot = __dirname+'/doc/www.digicert.com/clients/rest/docs/retail'
+var siteRoot = __dirname+'/www.digicert.com'
+
+var docRoot = siteRoot+'/clients/rest/docs/retail'
 
 app.get('/', function(req, res) {
   fs.createReadStream(docRoot+'/index.html').pipe(res);
@@ -16,6 +18,8 @@ app.get('/clients/rest/docs/retail/:sub/:page', function(req, res) {
   fs.createReadStream(docRoot+'/'+req.params.sub+'/'+req.params.page).pipe(res);
 })
 
-app.use(express.static(__dirname+'/doc/www.digicert.com'))
+app.use(express.static(siteRoot))
 
 app.listen(3000)
+
+console.log('listening on port 3000')

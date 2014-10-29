@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive test",
-    "tdd": "mocha -w --recursive test"
+    "tdd": "mocha -w --recursive test",
+    "serve-docs": "node doc/server"
   },
   "author": "Keyvan Fatehi <keyvanfatehi@gmail.com>",
   "license": "ISC",

@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Order Management - Overview</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Order Management - Overview</h1>
+
+		<div id="content">
+	<h2>Ordering a Certificate</h2>
+	<p>
+		Ordering a certificate through the API is a multi-step process. First a pending certificate order will be
+		created.
+		The pending order will be validated by DigiCert and then the certificate will be issued. After the certificate
+		has
+		been issued, you can retrieve it using the order id and it will be returned through the API as a PEM encoded
+		x509
+		certificate (base64).
+	</p>
+
+	<p>
+		The order endpoints may send email to the appropriate users. Some of the emails that are sent have action items
+		that
+		must be completed before the certificate can be issued.
+	</p>
+
+<table class="response_params">
+	<thead>
+	<tr>
+	<th class="col-0">Method</th><th class="col-1">Endpoint</th><th class="col-2">Action</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">POST</td><td class="col-1">/order/ssl</td><td class="col-2">Create a pending order for a new SSL Certificate</td></tr><tr><td class="col-0">POST</td><td class="col-1">/order/code</td><td class="col-2">Create a pending order for a code signing certificate</td></tr><tr><td class="col-0">GET</td><td class="col-1">/order/{order_id}</td><td class="col-2">View order status and other details</td></tr><tr><td class="col-0">GET</td><td class="col-1">/order/{order_id}/certificate</td><td class="col-2">Retrieve the certificate once the order has been processed and certificate issued</td></tr>
+	</tbody>
+</table>
+	<h2>Reissuing or Rekeying an SSL Certificate</h2>
+	<p>
+		Reissuing or rekeying a certificate involves multiple steps. First a request to either rekey or reissue the
+		certificate must be submitted. Once submitted, the certificate will be queued to be reissued. Once the
+		certificate has been reissued, you can retrieve it using the order id and it will be returned through the API as
+		a PEM encoded x509 certificate (base64).
+	</p>
+
+<table class="response_params">
+	<thead>
+	<tr>
+	<th class="col-0">Method</th><th class="col-1">Endpoint</th><th class="col-2">Action</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">REISSUE</td><td class="col-1">/order/{order_id}</td><td class="col-2">Rekeying a certificate is a simplified form of reissuing, where the key is the only change being made. The reissue request supports either a simplified rekeying or a standard reissue.</td></tr><tr><td class="col-0">GET</td><td class="col-1">/order/{order_id}</td><td class="col-2">View order status and other details</td></tr><tr><td class="col-0">GET</td><td class="col-1">/order/{order_id}/certificate</td><td class="col-2">Retrieve the certificate once the order has been processed and certificate issued</td></tr>
+	</tbody>
+</table></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

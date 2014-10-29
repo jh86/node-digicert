@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Introduction</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Introduction</h1>
+
+		<div id="content">	<script type="text/javascript" src="/clients/rest/docs//js/shBrushBash.js"></script>
+
+
+	<h2><a name="basics"></a>API Basics
+	</h2>
+
+	<p>
+		All API requests are submitted via REST-based URLs using REST features including HEADER-based authentication and
+		JSON/XML
+		request types.
+	</p>
+	<p>
+		The requests will be accepted through port 443, which is the default port for SSL. The character set encoding of
+		data in API calls and
+		responses is UTF-8. To ensure a well-formed request, make sure that the
+		<code class="header">User-Agent</code> and <code class="header">Content-Length</code> headers are specified in
+		the
+		request.
+	</p>
+
+	<h2>
+		<a name="authentication"></a>Authentication
+	</h2>
+
+	<p>
+		The REST API requires access to the existing Digicert APIs
+		and utilizes the same keys. However to authenticate
+		with the service, it uses <strong>Basic HTTP Authentication over SSL</strong>.
+	</p>
+
+	<p>As basic authentication is an established standard, it is easy to implement. Using cURL:</p>
+<pre><code data-language="shell">curl -u &quot;account_id:api_key&quot; ...</code></pre>	<p>Building the header manually:</p>
+	<ol>
+		<li>Combine the account id and api key into a string: <code>account_id:api_key</code></li>
+		<li>Base64 encode the string</li>
+		<li>Add the encoded string to the header: <code>Authorization: Basic {BASE64_ENCODED_STRING}</code></li>
+	</ol>
+	<p>So this is also valid in cURL:</p>
+
+<pre><code data-language="shell">curl -H &quot;Authorization: Basic {BASE64_ENCODED_STRING}&quot;</code></pre>
+	<h2><a name="requests"></a>Requests</h2>
+	<p>
+		Requests consist of two or three parts: Method, Endpoint, and Body. Every request has a method and endpoint,
+		but some also include a body. The body is formatted based on the
+		<code class="header">Content-Type</code> header sent.
+	</p>
+
+	<h3>Method</h3>
+	<p>
+		The API uses four standard HTTP methods and several custom methods. The standard methods supported are
+		<code class="header">GET</code>,
+		<code class="header">HEAD</code>, <code class="header">OPTIONS</code>, and
+		<code class="header">POST</code>. The custom methods are <code class="header">APPROVE</code>,
+				<code class="header">REISSUE</code>,
+		<code class="header">REJECT</code>,
+		<code class="header">RENEW</code>,
+		and <code class="header">REVOKE</code>.
+		The client can use any of these methods directly. This is the
+		preferred method. To use with cURL:
+	</p>
+<pre><code data-language="shell">curl -u &quot;account_id:api_key&quot; -X {CUSTOM_METHOD}...</code></pre>
+	<p>So, to revoke a request: <pre><code data-language="shell">curl -u &quot;account_id:api_key&quot; -X REVOKE ...</code></pre></p>
+
+	<p>Some client libraries may not allow custom HTTP
+		methods. For these libraries, there is an additional way to set the
+		method for a request: use a custom HTTP header.
+	</p>
+
+	<p>To use:</p>
+	<ol>
+		<li>Set the HTTP method as <code class="header">POST</code>.</li>
+		<li>Create a header named
+			<code class="header">X-HTTP-Method-Override</code> and set the value to be one of the custom methods.
+		</li>
+	</ol>
+
+	<p>To use with cURL:</p>
+
+<pre><code data-language="shell">curl -u &quot;account_id:api_key&quot; -X POST -H &quot;X-HTTP-Method-Override: REVOKE&quot;...</code></pre>
+	<h3>Endpoint</h3>
+	<p> REST requests use endpoints to retrieve and alter data. Endpoints are generally split into two types:</p>
+	<ol>
+		<li>
+			<em>Collection</em>: Represents a group of items. Examples include <code>/order</code> where
+			<code class="header">POST</code> creates a new item and
+			<code class="header">GET</code> returns a list of items.
+		</li>
+		<li>
+			<em>Item</em>: Represents a single item. These endpoints usually have an id attached at the end of the URL.
+			Examples include
+			<code>/order/00112233</code>
+			where <code class="header">POST</code> affects the particular order and <code class="header">GET</code>
+			returns details about the order.
+		</li>
+	</ol>
+
+	<p>Specific endpoints will be described later when explaining how to make specific requests.</p>
+
+	<h3>Body and Content Type</h3>
+	<p>
+		Most requests require passing in either <code class="header">JSON</code> or
+		<code class="header">XML</code> formatted data. Some requests may require standard content types like <code>image/jpeg</code>.
+		If an endpoint supports or requires a format other than <code class="header">JSON</code> or
+		<code class="header">XML</code>, it will be noted in the documentation.
+		Generally <code class="header">GET</code>
+		requests are the only ones that do not require sending formatted data. With some endpoints,
+		<code class="header">GET</code>
+		requests will support passing in additional parameters to filter the results.
+	</p>
+	<p>
+		For requests that require additional data, instead of using the generic <code>application/json</code> and
+		<code>application/xml</code> content types, the API supports custom content types that also include a version
+		number.
+	</p>
+
+	<p>The following content types are currently supported:</p>
+	<ol>
+		<li><code>application/vnd.digicert.rest-v1+xml</code></li>
+		<li><code>application/vnd.digicert.rest-v1+json</code></li>
+	</ol>
+
+	<p>To use, create a header:</p>
+
+	<code>Content-Type: application/vnd.digicert.rest-v1+json</code>
+
+	<p>A full cURL request may be something like:</p>
+
+<pre><code data-language="shell">curl -u &quot;account_id:api_key&quot; -X POST \
+-H &quot;Content-Type: application/vnd.digicert.rest-v1+json&quot; \
+--data &#039;{&quot;foo&quot;:&quot;bar&quot;}&#039; https://api.digicert.com/fez/00112233
+</code></pre>
+	<h2><a name="responses"></a>Responses</h2>
+
+	<p>Responses consist of two parts: Headers and Body. The body is formatted based on the content type requested in
+		the
+		<code class="header">Accept</code> header.</p>
+
+	<h3>Headers</h3>
+
+	<p>Every response will include an appropriate HTTP header. This header is based off of the
+		<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1">RFC 2616</a> specification.
+	</p>
+
+	<table class="striped">
+		<thead>
+		<tr>
+			<th>Code</th>
+			<th>Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>200</td>
+			<td>General success response</td>
+		</tr>
+		<tr>
+			<td>201</td>
+			<td>Created: Useful for creation of requests, orders, etc</td>
+		</tr>
+		<tr>
+			<td>204</td>
+			<td>No Content: For successful requests that don't require a response</td>
+		</tr>
+		<tr>
+			<td>301</td>
+			<td>Moved Permanently: Returned in the unlikely event that a URL has changed. Will also return a
+				<code class="header">Location</code> header with new URL. Clients should resubmit this request and submit
+				future requests to this new URL
+			</td>
+		</tr>
+		<tr>
+			<td>302</td>
+			<td>Moved Temporarily: Returned in the unlikely event that a URL has changed temporarily. Will also return a
+				<code class="header">Location</code> header with new URL. Clients should resubmit this single request
+				to this new URL
+			</td>
+		</tr>
+		<tr>
+			<td>304</td>
+			<td>Content not modified: Useful when accessing a URL while waiting for a response. Only used if an
+				<code class="header">If-None-Match</code> header was passed
+			</td>
+		</tr>
+		<tr>
+			<td>400</td>
+			<td>General client error</td>
+		</tr>
+		<tr>
+			<td>401</td>
+			<td>Unauthorized: Returned if the page is accessed without a valid account/API Key combination</td>
+		</tr>
+		<tr>
+			<td>403</td>
+			<td>User doesn't have permission to perform the requested action</td>
+		</tr>
+		<tr>
+			<td>404</td>
+			<td>Returned if the page doesn't exist or the API doesn't have permission to interact with a particular item
+			</td>
+		</tr>
+		<tr>
+			<td>405</td>
+			<td>Method not found. Returned if an endpoint doesn't support the method that was passed. It will also
+				return an
+				<code class="header">Allow</code> header with supported methods
+			</td>
+		</tr>
+		<tr>
+			<td>406</td>
+			<td>
+				If the client requests an incompatible response (i.e. the client wants a v1 response for an endpoint
+				only
+				available
+				in v2+), or the client doesn't specify a valid acceptable content-type
+			</td>
+		</tr>
+		<tr>
+			<td>500</td>
+			<td>Unexpected behavior that the API couldn't recover from</td>
+		</tr>
+		<tr>
+			<td>503</td>
+			<td>The system is currently unavailable</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>For most of the <code class="header">GET</code> requests, the API will also return an
+		<code class="header">Etag</code>
+		header so that clients can also pass in an <code class="header">If-None-Match</code> header.</p>
+
+	<h3>Body and Content Type</h3>
+	<p>For simplicity, the API support the same content types for both responses and requests.</p>
+
+	<p>For <code class="header">GET</code> requests, the client does not send additional data to the API. For
+		these requests, it is more appropriate to send an <code class="header">Accept</code> header than a
+		<code class="header">Content-Type</code>
+		header. However, if a <code class="header">Content-Type</code> header is passed and not an
+		<code class="header">Accept</code> header
+		(or the header is <code>Accept: */*</code>), the API will default to using the value set in the
+		<code class="header">Content-Type</code>.</p>
+
+	<p>For other requests, a client only needs to send an
+		<code class="header">Accept</code> header if the request is sent in one format
+		and the response should be sent in a different one (i.e. the request is a
+		<code class="header">JSON</code>-encoded string,
+		but the response needs to be in <code class="header">XML</code>).
+	</p>
+
+	<p>If the API cannot determine which format the client wants, it will return a 406 header.</p>
+
+	<h3>Successful Response</h3>
+	<p>All success responses will
+		return an HTTP code in the 200 – 399 range. Clients receiving these
+		headers will know that their request was successfully handled and
+		will expect an appropriate response.
+	</p>
+	<p>As an example, a client submits a <code class="header">POST</code> request to the <code>/enterprise/certificate/ssl</code>
+		endpoint. It will expect a <code>request_id</code> that could used in subsequent Approval Requests. It would
+		expect
+		a
+		response similar to below:
+	</p>
+
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.rest-v1+json)</th><th class="col-1">XML (application/vnd.digicert.rest-v1+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;request_id&quot;:7902
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;response&gt;
+  &lt;request_id&gt;7902&lt;/request_id&gt;
+&lt;/response&gt;</code></pre></td></tr>
+	</tbody>
+</table></div>
+	<h3>Error Response</h3>
+
+	<p>Error responses will return an HTTP code in 400+ range. Clients receiving these
+		headers know that their request failed for various reasons. The API should always at least return a 500 error if
+		there was a fatal error that wasn't caught. Most error responses return a special content type, based on the
+		initial
+		type being requested: <code>application/vnd.digicert.error+xml</code> for XML based requests, and
+		<code>application/vnd.digicert.error+json</code> for JSON based. This content type is based on emerging
+		standards.</p>
+
+	<p>For instance, a client wants to reject a pending request, but forgot to include the required NOTE.
+		They would make a <code class="header">REJECT</code> request to the <code>/request/7902</code>
+		endpoint, and would receive a 400 response with the following body:</p>
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.error+json)</th><th class="col-1">XML (application/vnd.digicert.error+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;errors&quot;:[
+    {
+      &quot;code&quot;:&quot;required_param:note&quot;,
+      &quot;description&quot;:&quot;Note is required&quot;
+    }
+  ]
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;errors&gt;
+  &lt;error&gt;
+    &lt;code&gt;required_param:note&lt;/code&gt;
+    &lt;description&gt;Note is required&lt;/description&gt;
+  &lt;/error&gt;
+&lt;/errors&gt;</code></pre></td></tr>
+	</tbody>
+</table></div>	<h2><a name="endpoints"></a>Endpoint Overview</h2>
+	<h3>HEAD Requests</h3>
+	<p>Any endpoint that supports a <code class="header">GET</code> method also supports the
+		<code class="header">HEAD</code> method. As defined by
+		<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4">RFC 2616</a>, a
+		<code class="header">HEAD</code> request is
+		treated the same as a <code class="header">GET</code>
+		request, except that it doesn't contain a response body.</p>
+
+	<h3>OPTIONS Requests</h3>
+	<p>All endpoints support an <code class="header">OPTIONS</code> method call. The <code class="header">OPTIONS</code>
+		method as defined in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.2">RFC 2616</a> returns
+		the
+		same <code class="header">ALLOW</code> header as a 405 error response.</p>
+
+</div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

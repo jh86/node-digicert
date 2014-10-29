@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Appendix - Server Types</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Appendix - Server Types</h1>
+
+		<div id="content">
+
+<table class="striped">
+			<tr>
+			<td>Apache</td>
+			<td>2</td>
+		</tr>
+			<tr>
+			<td>BEA Weblogic 8 & 9</td>
+			<td>42</td>
+		</tr>
+			<tr>
+			<td>Barracuda</td>
+			<td>41</td>
+		</tr>
+			<tr>
+			<td>Bea Weblogic 7 and older</td>
+			<td>29</td>
+		</tr>
+			<tr>
+			<td>Cisco</td>
+			<td>30</td>
+		</tr>
+			<tr>
+			<td>Citrix (Other)</td>
+			<td>39</td>
+		</tr>
+			<tr>
+			<td>Citrix Access Essentials</td>
+			<td>46</td>
+		</tr>
+			<tr>
+			<td>Citrix Access Gateway 4.x</td>
+			<td>50</td>
+		</tr>
+			<tr>
+			<td>Citrix Access Gateway 5.x and higher</td>
+			<td>58</td>
+		</tr>
+			<tr>
+			<td>F5 Big-IP</td>
+			<td>31</td>
+		</tr>
+			<tr>
+			<td>F5 FirePass</td>
+			<td>32</td>
+		</tr>
+			<tr>
+			<td>IBM HTTP Server</td>
+			<td>7</td>
+		</tr>
+			<tr>
+			<td>Java Web Server (Javasoft / Sun)</td>
+			<td>10</td>
+		</tr>
+			<tr>
+			<td>Juniper</td>
+			<td>33</td>
+		</tr>
+			<tr>
+			<td>Lighttpd</td>
+			<td>44</td>
+		</tr>
+			<tr>
+			<td>Lotus Domino</td>
+			<td>11</td>
+		</tr>
+			<tr>
+			<td>Mac OS X Server</td>
+			<td>49</td>
+		</tr>
+			<tr>
+			<td>Microsoft Exchange Server 2003</td>
+			<td>47</td>
+		</tr>
+			<tr>
+			<td>Microsoft Exchange Server 2007</td>
+			<td>36</td>
+		</tr>
+			<tr>
+			<td>Microsoft Exchange Server 2010</td>
+			<td>48</td>
+		</tr>
+			<tr>
+			<td>Microsoft Exchange Server 2013</td>
+			<td>68</td>
+		</tr>
+			<tr>
+			<td>Microsoft Forefront Unified Access Gateway</td>
+			<td>66</td>
+		</tr>
+			<tr>
+			<td>Microsoft IIS 1.x to 4.x</td>
+			<td>13</td>
+		</tr>
+			<tr>
+			<td>Microsoft IIS 5 or 6</td>
+			<td>14</td>
+		</tr>
+			<tr>
+			<td>Microsoft IIS 7</td>
+			<td>40</td>
+		</tr>
+			<tr>
+			<td>Microsoft IIS 8</td>
+			<td>67</td>
+		</tr>
+			<tr>
+			<td>Microsoft Live Communications Server 2005</td>
+			<td>37</td>
+		</tr>
+			<tr>
+			<td>Microsoft Lync Server 2010</td>
+			<td>59</td>
+		</tr>
+			<tr>
+			<td>Microsoft Lync Server 2013</td>
+			<td>69</td>
+		</tr>
+			<tr>
+			<td>Microsoft OCS R2</td>
+			<td>60</td>
+		</tr>
+			<tr>
+			<td>Microsoft Office Communications Server 2007</td>
+			<td>38</td>
+		</tr>
+			<tr>
+			<td>Microsoft Small Business Server 2008 & 2011</td>
+			<td>62</td>
+		</tr>
+			<tr>
+			<td>Netscape Enterprise Server</td>
+			<td>15</td>
+		</tr>
+			<tr>
+			<td>Netscape iPlanet</td>
+			<td>9</td>
+		</tr>
+			<tr>
+			<td>Novell NetWare</td>
+			<td>17</td>
+		</tr>
+			<tr>
+			<td>Novell iChain</td>
+			<td>65</td>
+		</tr>
+			<tr>
+			<td>OTHER</td>
+			<td>-1</td>
+		</tr>
+			<tr>
+			<td>Oracle</td>
+			<td>18</td>
+		</tr>
+			<tr>
+			<td>Qmail</td>
+			<td>34</td>
+		</tr>
+			<tr>
+			<td>SunOne</td>
+			<td>35</td>
+		</tr>
+			<tr>
+			<td>Tomcat</td>
+			<td>24</td>
+		</tr>
+			<tr>
+			<td>WebStar</td>
+			<td>26</td>
+		</tr>
+			<tr>
+			<td>Zeus Web Server</td>
+			<td>28</td>
+		</tr>
+			<tr>
+			<td>cPanel</td>
+			<td>43</td>
+		</tr>
+			<tr>
+			<td>nginx</td>
+			<td>45</td>
+		</tr>
+	</table>
+
+</div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Order Management - Retrieve an Issued Certificate</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Order Management - Retrieve an Issued Certificate</h1>
+
+		<div id="content">
+	<p>Once a certificate has been issued, it can be retrieved through the API by making a <code class="header">GET</code> request to the
+certificate endpoint. The API will return the certificate, the intermediate certificate, the root certificate,
+and the certificates in PKCS7. If the certificate has not yet been issued you will get an error code of
+<em>cert_unavailable_processing</em>.</p>
+
+	<p>
+		This endpoint will return an <code class="header">Etag</code> header that can be used on subsequent calls. If
+		nothing has changed, a 304 response will be returned.
+	</p>
+
+	<h2>Request Endpoint</h2>
+
+<table class="simple single">
+	<thead>
+	<tr>
+	<th class="col-0">Method</th><th class="col-1">URL</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">GET</td><td class="col-1">https://api.digicert.com/order/{order_id}/certificate</td></tr>
+	</tbody>
+</table>
+
+
+
+	<h2>Response</h2>
+
+	<table class="response_params ">
+	<thead>
+	<tr>
+	<th class="col-0">Parameter Name</th><th class="col-1">Data Type</th><th class="col-2">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">order_id</td><td class="col-1">[integer]</td><td class="col-2">Unique identifier for certificate order.</td></tr><tr><td class="col-0">serial</td><td class="col-1">[string]</td><td class="col-2">The serial Number of the Certificate</td></tr><tr><td class="col-0">certs</td><td class="col-1">[set] </td><td class="col-2">A data set containing the certificates</td></tr><tr><td class="col-0">  certificate</td><td class="col-1">[string]</td><td class="col-2">The certificate</td></tr><tr><td class="col-0">  intermediate</td><td class="col-1">[string]</td><td class="col-2">The intermediate certificate</td></tr><tr><td class="col-0">  root</td><td class="col-1">[string]</td><td class="col-2">The root certificate</td></tr><tr><td class="col-0">  pkcs7</td><td class="col-1">[string]</td><td class="col-2">PKCS7 of the certificates</td></tr>
+	</tbody>
+</table>	
+	<h2>Sample Request</h2>
+
+	<h3>Endpoint</h3>
+	<code>https://api.digicert.com/order/222307/certificate</code>
+
+	<h3>Headers</h3>
+	<code>Accept: application/vnd.digicert.rest-v1+json</code><br>	<code>Authorization: Basic MDAxMDA3OnNreWZhbGw=</code><br>	<code>User-Agent: MyAPIConsumer/0.42</code><br>
+	<h3>Body</h3>
+	<p>None</p>
+
+	<h2>Sample Response</h2>
+
+	<p>Note that with this sample request, it would return <code class="header">JSON</code>. Including
+		<code class="header">XML</code> for comparison.</p>
+
+	<h4>Status Code: 200</h4>
+	<h3>Headers</h3>
+
+	<code>Content-Length: 429</code><br>	<code>Content-Type: application/vnd.digicert.rest-v1+json</code><br>	<code>Etag: "eac8e208119b9d690be0e2c6981f3c5e"</code><br>	<h3> Body</h3>
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.rest-v1+json)</th><th class="col-1">XML (application/vnd.digicert.rest-v1+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;order_id&quot;:&quot;00276176&quot;,
+  &quot;serial&quot;:&quot;07C2EDE40FEEA2AA03C0615F32D3A26D&quot;,
+  &quot;certs&quot;:{
+    &quot;certificate&quot;:&quot;-----BEGIN CERTIFICATE-----\n[CERT HERE]\n-----END CERTIFICATE-----\n&quot;,
+    &quot;intermediate&quot;:&quot;-----BEGIN CERTIFICATE----\n[CERT HERE]\n-----END CERTIFICATE-----\n&quot;,
+    &quot;root&quot;:&quot;-----BEGIN CERTIFICATE-----\n[CERT HERE]\n-----END CERTIFICATE-----\n&quot;,
+    &quot;pkcs7&quot;:&quot;-----BEGIN PKCS7-----\n[CERT HERE]\n-----END PKCS7-----\n&quot;
+  }
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;response&gt;
+  &lt;order_id&gt;00276176&lt;/order_id&gt;
+  &lt;serial&gt;07C2EDE40FEEA2AA03C0615F32D3A26D&lt;/serial&gt;
+  &lt;certs&gt;
+    &lt;certificate&gt;
+       -----BEGIN CERTIFICATE-----
+MIIFMDCCBBigAwIBAgIQB8Lt5A/uoqoDwGFfMtOibTANBgkqhkiG9w0BAQUFADBu
+MRMwEQYKCZImiZPyLGQBGRYDY29tMR0wGwYKCZImiZPyLGQBGRYNRGlnaUNlcnQt
+[...]+KBK5AAZ7S8N4t3xL4Xgd8Z5QTIwlCj4iYETgC+e6ypRx1EnwkwPTM+v/a3qBAh8
+gErk3blCmLLK4ToULBp7R4/fZlyl4htejyDULMSLexKdA+AJ
+-----END CERTIFICATE-----
+    &lt;/certificate&gt;
+    &lt;intermediate&gt;
+        -----BEGIN CERTIFICATE----
+MIIE4zCCA8ugAwIBAgIQByZq8O6u1HhZsthDZLeKTTANBgkqhkiG9w0BAQUFADBx
+MRMwEQYKCZImiZPyLGQBGRYDY29tMR0wGwYKCZImiZPyLGQBGRYNRGlnaUNlcnQt
+[...]MdK3Empl2nll0vkxKKckM/6g1/zotmUC/L+rCw+75nlYYDN4EhN+2hqN0H7ekiMI
+BuUMrn/zOOCE/T51TFmQmVKYhw8mnF6HTeoNqSxiHYsQGDQodFA9847E7puXKWC7
+v2w7v6F5aA==
+-----END CERTIFICATE-----
+    &lt;/intermediate&gt;
+    &lt;root&gt;
+       -----BEGIN CERTIFICATE-----
+MIIDzzCCAregAwIBAgIQAblXTWj/ZrPV05Rb6HjP2TANBgkqhkiG9w0BAQUFADBx
+MRMwEQYKCZImiZPyLGQBGRYDY29tMR0wGwYKCZImiZPyLGQBGRYNRGlnaUNlcnQt
+[...]ijD+28PMnpMH6xOUsJHxpviYGF1Ph2aZvuILgnMGMqAwGp/bdJrHSoyta7CMhNuX
+Wg3SKbaUKKz/uA3rMEHFAJ9C4w==
+-----END CERTIFICATE-----
+    &lt;/root&gt;
+    &lt;pkcs7&gt;
+        -----BEGIN PKCS7-----
+MIIOGQYJKoZIhvcNAQcCoIIOCjCCDgYCAQExADALBgkqhkiG9w0BBwGggg3uMIIF
+MDCCBBigAwIBAgIQB8Lt5A/uoqoDwGFfMtOibTANBgkqhkiG9w0BAQUFADBuMRMw
+[...]ik9Be/i+DFEZQMy7ZfHGEtUx7BuYoNN88eWJfHg5QvbyVd7LwS3LYoow/tvDzJ6T
+B+sTlLCR8ab4mBhdT4dmmb7iC4JzBjKgMBqf23Sax0qMrWuwjITbl1oN0im2lCis
+/7gN6zBBxQCfQuMxAA==
+-----END PKCS7-----
+    &lt;/pkcs7&gt;
+  &lt;/certs&gt;
+&lt;/response&gt;</code></pre></td></tr>
+	</tbody>
+</table></div></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

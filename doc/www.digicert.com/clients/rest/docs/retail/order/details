@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Order Management - View Order Details</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Order Management - View Order Details</h1>
+
+		<div id="content">
+	<p>Once the certificate order has been created, periodically view the order details to check the order status.</p>
+
+	<p>
+		This endpoint will return an <code class="header">Etag</code> header that can be used on subsequent calls. If
+		nothing has changed, a 304 response will be returned.
+	</p>
+
+	<h2>Request Endpoint</h2>
+
+<table class="simple single">
+	<thead>
+	<tr>
+	<th class="col-0">Method</th><th class="col-1">URL</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">GET</td><td class="col-1">https://api.digicert.com/order/{order_id}</td></tr>
+	</tbody>
+</table>
+
+
+
+	<h2>Response</h2>
+
+	<table class="response_params ">
+	<thead>
+	<tr>
+	<th class="col-0">Parameter Name</th><th class="col-1">Data Type</th><th class="col-2">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">certificate_details</td><td class="col-1">[collection]</td><td class="col-2">Container for certificate details</td></tr><tr><td class="col-0">  order_id</td><td class="col-1">[integer]</td><td class="col-2">Unique identifier for certificate order.</td></tr><tr><td class="col-0">  status</td><td class="col-1">[string]</td><td class="col-2">Status of order.  Usually &#039;pending issuance&#039; or &#039;issued&#039;.</td></tr><tr><td class="col-0">  product_name</td><td class="col-1">[string]</td><td class="col-2">Product name of order. </td></tr><tr><td class="col-0">  validity</td><td class="col-1">[string]</td><td class="col-2">Validity Period of order.  Usually 1, 2 or 3 Year(s).</td></tr><tr><td class="col-0">  org_unit</td><td class="col-1">[string]</td><td class="col-2">The OU field of the certificate.</td></tr><tr><td class="col-0">  common_name</td><td class="col-1">[string]</td><td class="col-2">The Common Name field of the certificate.</td></tr><tr><td class="col-0">  sans</td><td class="col-1">[collection]</td><td class="col-2">A collection that contains one or more SANs, (if any).</td></tr><tr><td class="col-0">    san</td><td class="col-1">[string]</td><td class="col-2">A Subject Alternative Name (SAN) of the certificate.</td></tr><tr><td class="col-0">  order_date</td><td class="col-1">[datetime]</td><td class="col-2">The date the original certificate was ordered. Format: d-M-Y. Example: 19-JAN-2012</td></tr><tr><td class="col-0">  valid_from</td><td class="col-1">[datetime]</td><td class="col-2">The start date of the certificate&#039;s validity (if issued). Format: d-M-Y. Example: 19-JAN-2012</td></tr><tr><td class="col-0">  valid_till</td><td class="col-1">[datetime]</td><td class="col-2">The end date of the certificate&#039;s validity (if issued). Format: d-M-Y. Example: 19-JAN-2013</td></tr><tr><td class="col-0">  server_type</td><td class="col-1">[string]</td><td class="col-2">The server software type of the order.</td></tr><tr><td class="col-0">  server_type_name</td><td class="col-1">[string]</td><td class="col-2">Name of the server software type of the order.</td></tr><tr><td class="col-0">  site_seal_token</td><td class="col-1">[string]</td><td class="col-2">Eight-character site seal token.</td></tr><tr><td class="col-0">pending_reissue</td><td class="col-1">[collection]</td><td class="col-2">If there is a pending reissue, this section will be populated.</td></tr><tr><td class="col-0">  common_name</td><td class="col-1">[string]</td><td class="col-2">The Common Name in the current pending reissue.</td></tr><tr><td class="col-0">  sans</td><td class="col-1">[collection]</td><td class="col-2">A collection that contains one or more SANs, (if any).</td></tr><tr><td class="col-0">    san</td><td class="col-1">[string]</td><td class="col-2">A Subject Alternative Name (SAN) of the pending reissue.</td></tr><tr><td class="col-0">receipt</td><td class="col-1">[collection]</td><td class="col-2">Once the certificate has been issued, a receipt is generated</td></tr><tr><td class="col-0">  order_total</td><td class="col-1">[float]</td><td class="col-2">The total paid for the order</td></tr>
+	</tbody>
+</table>	
+	<h2>Sample Request</h2>
+
+	<h3>Endpoint</h3>
+	<code>https://api.digicert.com/order/222307</code>
+
+	<h3>Headers</h3>
+	<code>Accept: application/vnd.digicert.rest-v1+json</code><br>	<code>Authorization: Basic MDAxMDA3OnNreWZhbGw=</code><br>	<code>User-Agent: MyAPIConsumer/0.42</code><br>
+	<h3>Body</h3>
+	<p>None</p>
+
+	<h2>Sample Response</h2>
+
+	<p>Note that with this sample request, it would return <code class="header">JSON</code>. Including
+		<code class="header">XML</code> for comparison.</p>
+
+	<h4>Status Code: 200</h4>
+	<h3>Headers</h3>
+
+	<code>Content-Length: 582</code><br>	<code>Content-Type: application/vnd.digicert.rest-v1+json</code><br>	<code>Etag: "eac8e208119b9d690be0e2c6981f3c5e"</code><br>	<h3> Body</h3>
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.rest-v1+json)</th><th class="col-1">XML (application/vnd.digicert.rest-v1+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;certificate_details&quot;:{
+    &quot;order_id&quot;:&quot;00222307&quot;,
+    &quot;status&quot;:&quot;issued&quot;,
+    &quot;product_name&quot;:&quot;Unified Communications&quot;,
+    &quot;validity&quot;:&quot;1 Year(s)&quot;,
+    &quot;org_unit&quot;:&quot;&quot;,
+    &quot;common_name&quot;:&quot;www.example.com&quot;,
+    &quot;sans&quot;:[
+       &quot;a.example.com&quot;
+    ],
+    &quot;order_date&quot;:&quot;03-FEB-2012&quot;,
+    &quot;valid_from&quot;:&quot;03-FEB-2012&quot;,
+    &quot;valid_till&quot;:&quot;07-FEB-2013&quot;,
+    &quot;server_type&quot;:&quot;2&quot;,
+    &quot;server_type_name&quot;:&quot;Apache&quot;
+  },
+  &quot;pending_reissue&quot;:{
+    &quot;common_name&quot;:&quot;www.example.com&quot;,
+    &quot;sans&quot;:[
+       &quot;a.example.com&quot;,
+       &quot;b.example.com&quot;
+    ]
+  },
+  &quot;receipt&quot;:{
+    &quot;order_total&quot;:&quot;175.00&quot;
+  }
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;response&gt;
+  &lt;certificate_details&gt;
+    &lt;order_id&gt;00222307&lt;/order_id&gt;
+    &lt;product_name&gt;Unified Communications&lt;/product_name&gt;
+    &lt;validity&gt;1 Year(s)&lt;/validity&gt;
+    &lt;org_unit&gt;&lt;/org_unit&gt;
+      &lt;common_name&gt;www.example.com&lt;/common_name&gt;
+      &lt;sans&gt;
+        &lt;san&gt;a.example.com&lt;/san&gt;
+      &lt;/sans&gt;
+      &lt;status&gt;issued&lt;/status&gt;
+      &lt;order_date&gt;03-FEB-2012&lt;/order_date&gt;
+      &lt;valid_from&gt;03-FEB-2012&lt;/valid_from&gt;
+      &lt;valid_till&gt;07-FEB-2013&lt;/valid_till&gt;
+      &lt;server_type&gt;2&lt;/server_type&gt;
+      &lt;server_type_name&gt;Apache&lt;/server_type_name&gt;
+    &lt;/certificate_details&gt;
+    &lt;pending_reissue&gt;
+      &lt;common_name&gt;www.example.com&lt;/common_name&gt;
+      &lt;sans&gt;
+        &lt;san&gt;a.example.com&lt;/san&gt;
+        &lt;san&gt;b.example.com&lt;/san&gt;
+      &lt;/sans&gt;
+    &lt;/pending_reissue&gt;
+    &lt;receipt&gt;
+      &lt;order_total&gt;175.00&lt;/order_total&gt;
+    &lt;/receipt&gt;
+&lt;/response&gt;</code></pre></td></tr>
+	</tbody>
+</table></div></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

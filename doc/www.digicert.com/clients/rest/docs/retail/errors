@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Errors and Troubleshooting</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Errors and Troubleshooting</h1>
+
+		<div id="content">	<p>
+		As mentioned in the introduction, error responses will return an HTTP code in 400+ range. Clients receiving
+		these
+		headers know that their request failed for various reasons. The API should always at least return a 500 error if
+		there was a fatal error that wasn't caught. Most error responses return a special content type, based on the
+		initial
+		type being requested: <code>application/vnd.digicert.error+xml</code> for XML based requests, and
+		<code>application/vnd.digicert.error+json</code> for JSON based. This content type is based on emerging
+		standards.
+	</p>
+	<p>
+		In the case of 406 errors, the API doesn't know what format the client requested, so it will send
+		<code>application/vnd.digicert.error+json.</code>
+	</p>
+
+	<h3>Error Return Values</h3>
+<table class="response_params ">
+	<thead>
+	<tr>
+	<th class="col-0">Parameter Name</th><th class="col-1">Data Type</th><th class="col-2">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">errors</td><td class="col-1">[collection]</td><td class="col-2">A collection of error codes</td></tr><tr><td class="col-0"> error</td><td class="col-1">[set]</td><td class="col-2">A data set containing information about a specific error</td></tr><tr><td class="col-0">  code</td><td class="col-1">[string]</td><td class="col-2">An error code that identifies the error that occurred</td></tr><tr><td class="col-0">  description</td><td class="col-1">[string]</td><td class="col-2">A human readable description of the error</td></tr>
+	</tbody>
+</table>
+	<h3>Sample XML Error Response</h3>
+
+	<p>
+		For instance, a client wants to reject a pending request, but forgot to include the required NOTE.
+		They would make a <code class="header">REJECT</code> request to the <code>/request/7902</code>
+		endpoint, and would receive a 400 response with the following body:
+	</p>
+
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.error+json)</th><th class="col-1">XML (application/vnd.digicert.error+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;errors&quot;:[
+    {
+      &quot;code&quot;:&quot;required_param:note&quot;,
+      &quot;description&quot;:&quot;Note is required&quot;
+    }
+  ]
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;errors&gt;
+  &lt;error&gt;
+    &lt;code&gt;required_param:note&lt;/code&gt;
+    &lt;description&gt;Note is required&lt;/description&gt;
+  &lt;/error&gt;
+&lt;/errors&gt;</code></pre></td></tr>
+	</tbody>
+</table></div></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

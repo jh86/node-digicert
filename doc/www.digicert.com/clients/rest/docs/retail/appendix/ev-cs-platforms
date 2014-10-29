@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Appendix - EV Code Signing Certificate Platforms</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Appendix - EV Code Signing Certificate Platforms</h1>
+
+		<div id="content">
+EV Code Signing Certificates must be installed on to a hardware token device. DigiCert offers two provisioning
+options:
+
+<ol>
+	<li>
+		We can ship you a hardware token with your EV Code Signing Certificate already provisioned for you
+		(<code>cs_provisioning_method = 'ship_token'</code>)
+	</li>
+	<li>
+		If you have a qualified hardware token (see chart below), you can provision your own certificate using the tool
+		found at http://www.digicert.com/util/DigiCertHardwareCertificateInstaller.zip		(<code>cs_provisioning_method = 'client_app'</code>)
+	</li>
+</ol>
+
+<table class="striped">
+			<tr>
+			<td>AEP Keyper</td>
+			<td>15</td>
+		</tr>
+			<tr>
+			<td>ARX PrivateServer</td>
+			<td>16</td>
+		</tr>
+			<tr>
+			<td>Bull Trustway Crypto PCI </td>
+			<td>17</td>
+		</tr>
+			<tr>
+			<td>Other FIPS 140-2 Level 2 Device</td>
+			<td>-1</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken 5100</td>
+			<td>6</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken 5105</td>
+			<td>7</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken 5200</td>
+			<td>8</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken 5205</td>
+			<td>9</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken PRO 72K</td>
+			<td>3</td>
+		</tr>
+			<tr>
+			<td>SafeNet eToken PRO Anywhere</td>
+			<td>2</td>
+		</tr>
+			<tr>
+			<td>SafeNet iKey 4000</td>
+			<td>10</td>
+		</tr>
+			<tr>
+			<td>Safenet Luna</td>
+			<td>12</td>
+		</tr>
+			<tr>
+			<td>Thales nShield</td>
+			<td>13</td>
+		</tr>
+			<tr>
+			<td>Utimaco CryptoServer</td>
+			<td>14</td>
+		</tr>
+	</table>
+</div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

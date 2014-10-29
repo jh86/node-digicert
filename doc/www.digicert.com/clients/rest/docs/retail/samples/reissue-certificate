@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Sample Code - Reissue Certificate</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Sample Code - Reissue Certificate</h1>
+
+		<div id="content">
+<p>For the examples below:</p>
+<dl>
+	<dt>Account ID</dt>
+	<dd>001007</dd>
+
+	<dt>API Key</dt>
+	<dd>n9hq0fp9q63htpmt7xcthztt5n4zx721</dd>
+
+	<dt>Order ID</dt>
+	<dd>111222</dd>
+</dl>
+
+<h2>Using cURL</h2>
+
+User creates a <code class="header">JSON</code> string (named
+<em>data.json</em> for simplicity and formatted for readability):
+
+<pre><code data-language="javascript">{
+  &quot;server_type&quot;:2,
+  &quot;csr&quot;:&quot;-----BEGIN CERTIFICATE REQUEST-----\n[CSR GOES HERE]\n-----END CERTIFICATE REQUEST-----&quot;
+}
+</code></pre>
+User uses curl from the commandline to send the <code class="header">REISSUE</code> request:
+
+<pre><code data-language="shell">curl -u &quot;001007:n9hq0fp9q63htpmt7xcthztt5n4zx721&quot; -X REISSUE \
+-H &quot;Content-Type: application/vnd.digicert.rest-v1+json&quot; \
+--data @data.json https://api.digicert.com/order/111222</code></pre>
+
+<h2>Using C#</h2>
+
+<pre><code data-language="csharp">using System;
+using System.Text;
+using System.Net;
+using System.IO;
+
+namespace ConsoleApplication1
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      string post_data = @&quot;{
+&quot;&quot;server_type&quot;&quot;:2,
+&quot;&quot;csr&quot;&quot;:&quot;&quot;-----BEGIN CERTIFICATE REQUEST-----\n[CSR GOES HERE]\n-----END CERTIFICATE REQUEST-----&quot;&quot;
+      }&quot;;
+
+      byte[] postBytes = Encoding.UTF8.GetBytes(post_data);
+      string uri = &quot;https://api.digicert.com/order/111222&quot;;
+
+      HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+      request.KeepAlive = false;
+      request.ProtocolVersion = HttpVersion.Version10;
+      request.Method = &quot;REISSUE&quot;;
+      request.UserAgent = &quot;DigiCertAPIClient/0.1&quot;;
+      request.ContentType = &quot;application/vnd.digicert.rest-v1+json&quot;;
+      request.ContentLength = postBytes.Length;
+      request.Headers.Add(&quot;Authorization&quot;, &quot;Basic &quot; + GetEncodedCredential());
+
+      try
+      {
+        Stream requestStream = request.GetRequestStream();
+        requestStream.Write(postBytes, 0, postBytes.Length);
+        requestStream.Close();
+
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();//throws WebException
+        Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
+      }
+      catch (WebException e)
+      {
+        Console.WriteLine(e.Message);
+      }
+    }
+
+    static private String GetEncodedCredential()
+    {
+      return Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(&quot;001007&quot; + &quot;:&quot; + &quot;n9hq0fp9q63htpmt7xcthztt5n4zx721&quot;));
+    }
+  }
+}
+</code></pre>
+<h2>Using PHP</h2>
+
+<pre><code data-language="php">
+$arr = array(
+&quot;server_type&quot; =&gt; 2,
+&quot;csr&quot; =&gt; &quot;-----BEGIN CERTIFICATE REQUEST-----\n[CSR GOES HERE]\n-----END CERTIFICATE REQUEST-----&quot;);
+
+$json = json_encode($arr);
+$headers = array(
+&#039;Content-Type: application/vnd.digicert.rest-v1+json&#039;
+);
+
+$url = &#039;https://api.digicert.com/order/111222&#039;;
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_USERPWD, &#039;001007:n9hq0fp9q63htpmt7xcthztt5n4zx721&#039;);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, &#039;REISSUE&#039;);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+$result = curl_exec($ch);
+
+</code></pre>
+<h2>Using Ruby</h2>
+
+<pre><code data-language="ruby">require &#039;net/http&#039;
+require &#039;uri&#039;
+
+uri = URI.parse &#039;https://api.digicert.com/order/111222&#039;
+
+request = Net::HTTP::POST.new uri.request_uri
+request.basic_auth(&#039;001007&#039;,&#039;n9hq0fp9q63htpmt7xcthztt5n4zx721&#039;)
+
+request[&#039;Content-Type&#039;] = &#039;application/vnd.digicert.rest-v1+json&#039;
+request[&#039;X-HTTP-Method-Override&#039;] = &#039;REISSUE&#039;
+
+#Note that this JSON body is formatted for readability
+request.body = &lt;&lt;JSON
+{
+&quot;server_type&quot;:2,
+&quot;csr&quot;:&quot;-----BEGIN CERTIFICATE REQUEST-----\n[CSR GOES HERE]\n-----END CERTIFICATE REQUEST-----&quot;
+}
+JSON
+
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+
+result = http.request(request)
+</code></pre></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

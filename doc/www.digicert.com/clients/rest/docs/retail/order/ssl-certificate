@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation for the DigiCert Retail API  : Order Management - Order an SSL Certificate</title>
+	<style type="text/css">
+		@import "/clients/rest/docs//css/docs.css";
+		@import "/clients/rest/docs//css/themes/github.css";
+	</style>
+
+	<script type="text/javascript" src="/clients/rest/docs//js/rainbow-custom.min.js"></script>
+</head>
+<body>
+<div id="header">
+	<a href="/clients/rest/docs/retail">
+		<img src="/images/jira-digicert-logo-2.png">
+		Documentation for the DigiCert Retail API	</a>
+</div>
+<div id="container">
+	<div id="center" class="column">
+		<h1>Order Management - Order an SSL Certificate</h1>
+
+		<div id="content">
+
+	<h2>Request Endpoint</h2>
+
+<table class="simple single">
+	<thead>
+	<tr>
+	<th class="col-0">Method</th><th class="col-1">URL</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">POST</td><td class="col-1">https://api.digicert.com/order/ssl</td></tr>
+	</tbody>
+</table>
+
+
+	<h2>Request Parameters</h2>
+	<p>
+		Parameters are encoded in one of the content types that is accepted by the endpoint.
+	</p>
+	<table class="request_params ">
+	<thead>
+	<tr>
+	<th class="col-0">Parameter Name</th><th class="col-1">Req/Opt</th><th class="col-2">Allowed Values</th><th class="col-3">Default</th><th class="col-4">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">csr</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">Certificate Signing Request.  To create a CSR from your server, visit DigiCert's website at <a href="http://www.digicert.com/csr-creation.htm">http://www.digicert.com/csr-creation.htm</a> for details.</td></tr><tr><td class="col-0">validity</td><td class="col-1">Required</td><td class="col-2">1, 2, 3</td><td class="col-3"></td><td class="col-4">Certificate validity length in years.  For EV certificates, only 1 and 2 year lengths are allowed.</td></tr><tr><td class="col-0">common_name</td><td class="col-1">Optional</td><td class="col-2">[string]</td><td class="col-3">[decoded from CSR]</td><td class="col-4">The name to be secured in the certificate.  A sample common name: example.com</td></tr><tr><td class="col-0">sans</td><td class="col-1">Optional</td><td class="col-2">[string]</td><td class="col-3">[decoded from CSR]</td><td class="col-4">Subject Alternative Names.  A comma delimited list of names to be secured in the certificate.  Adding SANs names incurs additional cost. </td></tr><tr><td class="col-0">server_type</td><td class="col-1">Optional</td><td class="col-2">see <a href="/clients/rest/docs/retail/appendix/server-types">Server Types</a></td><td class="col-3">-1</td><td class="col-4">Server platform.  Defaults to Other.</td></tr><tr><td class="col-0">signature_hash</td><td class="col-1">Optional</td><td class="col-2">sha1, sha256</td><td class="col-3">sha1</td><td class="col-4">The certificate&#039;s signing algorithm hash</td></tr><tr><td class="col-0">org_unit</td><td class="col-1">Optional</td><td class="col-2">[string]</td><td class="col-3">[blank]</td><td class="col-4">This is the OU field to be included in the certificate.</td></tr><tr><td class="col-0">org_name</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">Name of organization which owns common name.</td></tr><tr><td class="col-0">org_addr1</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">Address line 1 of the organization&#039;s address.</td></tr><tr><td class="col-0">org_addr2</td><td class="col-1">Optional</td><td class="col-2">[string]</td><td class="col-3">[blank]</td><td class="col-4">Address line 2 of the organization&#039;s address.</td></tr><tr><td class="col-0">org_city</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">City of organization&#039;s address.</td></tr><tr><td class="col-0">org_state</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">State / Province of the organization&#039;s address.</td></tr><tr><td class="col-0">org_zip</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">Zip or Postal code of the organization&#039;s address.</td></tr><tr><td class="col-0">org_country</td><td class="col-1">Required</td><td class="col-2">see <a href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a></td><td class="col-3"></td><td class="col-4">A two character, lowercase abbreviation for country.</td></tr><tr><td class="col-0">telephone</td><td class="col-1">Optional**</td><td class="col-2">[numeric string]</td><td class="col-3">[blank]</td><td class="col-4">Main telephone number of the organization.</td></tr><tr><td class="col-0">org_contact_job_title</td><td class="col-1">Optional**</td><td class="col-2">[string]</td><td class="col-3">[blank]</td><td class="col-4">Title of contact working at the organization.</td></tr><tr><td class="col-0">org_contact_firstname</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">First name of the organization contact.</td></tr><tr><td class="col-0">org_contact_lastname</td><td class="col-1">Required</td><td class="col-2">[string]</td><td class="col-3"></td><td class="col-4">Last name of the organization contact.</td></tr><tr><td class="col-0">org_contact_email</td><td class="col-1">Required</td><td class="col-2">[email address]</td><td class="col-3"></td><td class="col-4">Email address of the organization contact.</td></tr><tr><td class="col-0">org_contact_telephone</td><td class="col-1">Required</td><td class="col-2">[numeric string]</td><td class="col-3"></td><td class="col-4">Telephone number of the organization contact.</td></tr><tr><td class="col-0">org_contact_telephone_ext</td><td class="col-1">Optional</td><td class="col-2">[numeric string]</td><td class="col-3">[blank]</td><td class="col-4">Extension number of the organization contact.</td></tr><tr><td class="col-0">ev</td><td class="col-1">Optional</td><td class="col-2">[boolean]</td><td class="col-3">false</td><td class="col-4">Whether this is an EV certificate request or not. </td></tr>
+	</tbody>
+</table>
+			<p class="footnote">** telephone and org_contact_job_title fields are required for EV certificates.</p>
+	
+	<h2>Response</h2>
+
+	<table class="response_params  single">
+	<thead>
+	<tr>
+	<th class="col-0">Parameter Name</th><th class="col-1">Data Type</th><th class="col-2">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0">order_id</td><td class="col-1">[integer]</td><td class="col-2">The unique identifier of the certificate order related to the request</td></tr>
+	</tbody>
+</table>	
+	<h2>Sample Request</h2>
+
+	<h3>Endpoint</h3>
+	<code>https://api.digicert.com/order/ssl</code>
+
+	<h3>Headers</h3>
+	<code>Authorization: Basic MDAxMDA3OnNreWZhbGw=</code><br>	<code>Content-Length: 496</code><br>	<code>Content-Type: application/vnd.digicert.rest-v1+json</code><br>	<code>User-Agent: MyAPIConsumer/0.42</code><br>
+	<h3>Body</h3>
+	<pre><code data-language="javascript">{
+  &quot;server_type&quot;: &quot;2&quot;,
+  &quot;validity&quot;: &quot;2&quot;,
+  &quot;common_name&quot;: &quot;www.example.com&quot;,
+  &quot;org_name&quot;: &quot;Tampa Bay Cray LLC&quot;,
+  &quot;org_addr1&quot;: &quot;1234 Sesame Street&quot;,
+  &quot;org_city&quot;: &quot;Tampa&quot;,
+  &quot;org_state&quot;: &quot;FL&quot;,
+  &quot;org_zip&quot;: &quot;33615&quot;,
+  &quot;org_country&quot;: &quot;US&quot;,
+  &quot;org_contact_firstname&quot;: &quot;Joe&quot;,
+  &quot;org_contact_lastname&quot;: &quot;Bloggs&quot;,
+  &quot;org_contact_email&quot;: &quot;joe@example.com&quot;,
+  &quot;org_contact_telephone&quot;: &quot;555-123-1234&quot;,
+  &quot;csr&quot;: &quot;-----BEGIN CERTIFICATE REQUEST-----\n[CSR GOES HERE]\n-----END CERTIFICATE REQUEST-----&quot;
+}</code></pre>
+	<h2>Sample Response</h2>
+
+	<p>Note that with this sample request, it would return <code class="header">JSON</code>. Including
+		<code class="header">XML</code> for comparison.</p>
+
+	<h4>Status Code: 201</h4>
+	<h3>Headers</h3>
+
+	<code>Content-Length: 25</code><br>	<code>Content-Type: application/vnd.digicert.rest-v1+json</code><br>	<h3> Body</h3>
+<div style="max-width: 100%; overflow: auto;"><table class="simple response_body single">
+	<thead>
+	<tr>
+	<th class="col-0">JSON (application/vnd.digicert.rest-v1+json)</th><th class="col-1">XML (application/vnd.digicert.rest-v1+xml)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr><td class="col-0"><pre><code data-language="javascript">{
+  &quot;order_id&quot;:00222307
+}</code></pre></td><td class="col-1"><pre><code data-language="html">&lt;response&gt;
+  &lt;order_id&gt;00222307&lt;/order_id&gt;
+&lt;/response&gt;</code></pre></td></tr>
+	</tbody>
+</table></div></div>
+        <div id="center-filler" style="height: 0">&nbsp;</div>
+    </div>
+	<div id="left" class="column">
+					<ol>
+															<li>
+													Introduction							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#basics">API Basics</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#authentication">Authentication</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#requests">Requests</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#responses">Responses</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/#endpoints">Endpoint Overview</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Order Management							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/overview">Overview</a>
+                                    </li>
+																	<li>
+                                                                                <a name="current_page" href="/clients/rest/docs/retail/order/ssl-certificate">Order an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/cs-certificate">Order a Code Signing Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/wifi-certificate">Order a Wifi Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/reissue-ssl-certificate">Rekey or Reissue an SSL Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/retrieve-certificate">Retrieve an Issued Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/order/details">View Order Details</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													Sample Code							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/reissue-certificate">Reissue Certificate</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/samples/retrieve-certificate">Retrieve Certificate</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/errors">Errors and Troubleshooting</a>
+											</li>
+																				<li>
+													Appendix							<ul>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/country-codes">Country Codes</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/server-types">Server Types</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/cs-platforms">Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/ev-cs-platforms">EV Code Signing Certificate Platforms</a>
+                                    </li>
+																	<li>
+                                                                                <a  href="/clients/rest/docs/retail/appendix/iso-languages">ISO 639-2 Language Codes</a>
+                                    </li>
+															</ul>
+											</li>
+																				<li>
+													<a href="/clients/rest/docs/retail/print/DigiCert-REST-API-retail-2014-10-29.pdf">Print-Friendly Documentation</a>
+											</li>
+												</ol>
+		        <div id="left-filler" style="height: 0">&nbsp;</div>
+    </div>
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

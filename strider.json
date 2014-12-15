@@ -1,0 +1,4 @@
+{
+  "prepare": "npm install",
+  "test": "npm test"
+}

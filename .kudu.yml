@@ -2,3 +2,5 @@ image: dockerfile/nodejs
 script:
   - npm install
   - npm test
+services:
+  - dockerfile/mongodb

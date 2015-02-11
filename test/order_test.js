@@ -38,7 +38,7 @@ describe("digicert#orderSSLCertificate", function() {
   it("makes the request", function(done) {
     digicert.orderSSLCertificate(fakeRequestBody, function(err, res) {
       mock.done()
-      expect(res.order_id).to.eq(12345)
+      expect(res.order_id).to.eq(12345+"failtest")
       done(err)
     })
   });

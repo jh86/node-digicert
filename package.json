@@ -1,6 +1,6 @@
 {
   "name": "digicert",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "digicert client library",
   "main": "index.js",
   "scripts": {
